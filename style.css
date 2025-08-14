@@ -1,0 +1,426 @@
+/* Importa las utilidades de Tailwind CSS */
+@import url("https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css");
+
+/* Fuentes personalizadas */
+body {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f8f9fa; /* Fondo general claro */
+}
+
+/* Animación de fondo sutil para el cuerpo */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.1) 0%, transparent 30%);
+    opacity: 0.6;
+    z-index: -1;
+    animation: gradientShift 20s ease infinite alternate;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* Estilos Generales para Secciones */
+.section {
+    padding: 6rem 0;
+    opacity: 0; /* Inicialmente oculto para animación de fade-in */
+    transform: translateY(20px); /* Ligeramente desplazado para animación */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: #3b82f6; /* Color primario */
+    border-radius: 2px;
+}
+
+/* Header */
+.header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-radius: 0 0 15px 15px; /* Bordes redondeados en la parte inferior */
+    animation: fadeInDown 0.5s ease-out;
+}
+
+.logo {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #3b82f6; /* Color primario */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: #2563eb; /* Un tono más oscuro */
+}
+
+.nav-menu .nav-link {
+    margin-left: 2rem;
+    color: #555;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease, transform 0.2s ease;
+    padding: 0.5rem 0;
+}
+
+.nav-menu .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #3b82f6;
+    transition: width 0.3s ease-out;
+}
+
+.nav-menu .nav-link:hover {
+    color: #3b82f6;
+    transform: translateY(-2px);
+}
+
+.nav-menu .nav-link:hover::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: calc(100vh - 80px); /* Altura de la vista menos la altura del header */
+    background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%); /* Degradado suave */
+    color: #2c3e50;
+    position: relative;
+    overflow: hidden; /* Para contener las formas animadas */
+}
+
+.hero-content {
+    max-width: 900px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.hero-title .highlight {
+    color: #3b82f6; /* Color primario */
+}
+
+.hero-subtitle {
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #555;
+    animation: fadeIn 1.5s ease-out 0.5s forwards; /* Retraso para aparecer después del título */
+    opacity: 0;
+}
+
+.social-links .social-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    margin: 0 0.75rem;
+    color: #3b82f6;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.social-links .social-icon:hover {
+    background-color: #3b82f6;
+    color: #ffffff;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+    border-color: #ffffff;
+}
+
+/* Animaciones para la sección Hero */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Animación de la imagen de perfil */
+@keyframes pulse-slight {
+    0% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    50% { transform: scale(1.02); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+    100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+}
+.animate-pulse-slight {
+    animation: pulse-slight 3s infinite ease-in-out;
+}
+
+
+/* About Section */
+.about-section {
+    background-color: #ffffff;
+    border-radius: 15px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.about-text p {
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+
+/* Skills Section */
+.skills-section {
+    background-color: #f0f4f8; /* Un gris muy claro */
+    border-radius: 15px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.skill-item {
+    border: 1px solid #e0e7ff;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden; /* Asegura que el contenido interno no se desborde al redondear */
+}
+
+.skill-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #3b82f6;
+    margin-bottom: 0.5rem;
+}
+
+.skill-description {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.level-bar-container {
+    height: 8px;
+    border-radius: 9999px; /* Para que sea totalmente redondo */
+    overflow: hidden;
+}
+
+.level-bar {
+    height: 100%;
+    border-radius: 9999px;
+    animation: fillBar 1.5s ease-out forwards;
+    width: 0; /* Se animará con JS */
+}
+
+/* Animación de llenado de la barra de habilidad */
+@keyframes fillBar {
+    from { width: 0; }
+    to { width: var(--skill-width); } /* Usado con JS para el ancho final */
+}
+
+
+/* Portfolio Section */
+.portfolio-section {
+    background-color: #ffffff;
+    border-radius: 15px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.portfolio-item {
+    border: 1px solid #e0e7ff;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.portfolio-item img {
+    border-bottom: 1px solid #eee;
+}
+
+.project-links a {
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.project-links a:hover {
+    color: #2563eb;
+}
+
+/* Contact Section */
+.contact-section {
+    background-color: #f0f4f8;
+    border-radius: 15px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px; /* Botones pill-shaped */
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.button-primary {
+    background-color: #3b82f6;
+    color: #ffffff;
+    border: 2px solid #3b82f6;
+}
+
+.button-primary:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+}
+
+.button-secondary {
+    background-color: #ffffff;
+    color: #3b82f6;
+    border: 2px solid #3b82f6;
+}
+
+.button-secondary:hover {
+    background-color: #e0f2fe;
+    color: #2563eb;
+    border-color: #2563eb;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15);
+}
+
+/* Footer */
+.footer {
+    background-color: #2c3e50; /* Un color oscuro para el footer */
+    color: #ecf0f1;
+    padding: 2rem 0;
+    border-top: 5px solid #3b82f6;
+    border-radius: 15px 15px 0 0; /* Bordes redondeados en la parte superior */
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-menu {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-menu .nav-link {
+        margin: 0.5rem 0.75rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+
+    .social-links .social-icon {
+        width: 40px;
+        height: 40px;
+        margin: 0 0.5rem;
+    }
+
+    .section {
+        padding: 4rem 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .about-content {
+        flex-direction: column;
+    }
+
+    .about-text, .about-image {
+        width: 100%;
+        text-align: center;
+    }
+
+    .about-image {
+        margin-top: 2rem;
+        margin-left: 0;
+    }
+
+    .skills-grid, .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-methods {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 80%; /* Asegura que los botones ocupen más espacio en móvil */
+        margin-left: 0 !important; /* Anula el margin-left en móvil */
+        margin-right: 0 !important;
+    }
+    .button-secondary {
+        margin-top: 1rem; /* Espacio entre botones en móvil */
+    }
+}

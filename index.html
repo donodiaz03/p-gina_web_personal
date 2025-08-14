@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Nombre - Desarrollador Web</title>
+    <!-- Enlace a la hoja de estilos CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Enlace a los iconos de Lucide (usado para un toque moderno) -->
+    <!-- Se ha cambiado la importación de lucide-react a lucide-static para compatibilidad con HTML/JS vanilla -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Define la fuente Inter desde Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container mx-auto px-4 py-6 flex justify-between items-center">
+            <a href="#" class="logo">Tu Nombre</a>
+            <nav class="nav-menu">
+                <a href="#about" class="nav-link">Sobre Mí</a>
+                <a href="#skills" class="nav-link">Habilidades</a>
+                <a href="#portfolio" class="nav-link">Portafolio</a>
+                <a href="#contact" class="nav-link">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section flex items-center justify-center text-center">
+            <div class="hero-content">
+                <h1 class="hero-title">Hola, soy <span class="highlight">Tu Nombre</span></h1>
+                <p class="hero-subtitle">Desarrollador Web Full-Stack apasionado por crear experiencias digitales innovadoras.</p>
+                <div class="social-links mt-8">
+                    <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <!-- Icono de GitHub de Lucide -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.23c2.8.35 5.5 1.4 5.5 6.02v.22c0 2.2-1.5 4-3.5 4a6.5 6.5 0 0 1-3.26-1.07c-.39.23-.74.46-1.06.69-.75.58-1.46.99-2.34.99-.88 0-1.59-.41-2.34-.99-.32-.23-.67-.46-1.06-.69A6.5 6.5 0 0 1 2 20v-.22c0-4.62 2.7-5.67 5.5-6.02A4.8 4.8 0 0 0 6 18v4"/><path d="M9 18a.3.3 0 0 1-.45-.09A.3.3 0 0 1 9 18zm5 0a.3.3 0 0 1-.45-.09A.3.3 0 0 1 14 18z"/><path d="M9 18a.3.3 0 0 1-.45-.09A.3.3 0 0 1 9 18z"/></svg>
+                    </a>
+                    <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <!-- Icono de LinkedIn de Lucide -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="mailto:tu.correo@example.com" class="social-icon">
+                        <!-- Icono de Correo de Lucide -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </a>
+                    <!-- Añade más enlaces si lo deseas, como X (Twitter), tu sitio personal, etc. -->
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section about-section">
+            <div class="container mx-auto px-4 py-16">
+                <h2 class="section-title">Sobre Mí</h2>
+                <div class="about-content flex flex-col md:flex-row items-center justify-between mt-8">
+                    <div class="about-text md:w-2/3 text-lg leading-relaxed">
+                        <p>Soy un desarrollador web con X años de experiencia en la creación de aplicaciones web robustas y escalables. Mi pasión radica en traducir ideas complejas en interfaces de usuario intuitivas y funcionales, utilizando las últimas tecnologías.</p>
+                        <p class="mt-4">He trabajado en proyectos que abarcan desde sitios web estáticos hasta complejos sistemas de gestión de contenido y aplicaciones de una sola página. Siempre estoy aprendiendo y explorando nuevas herramientas para mejorar mis habilidades y entregar soluciones de alta calidad.</p>
+                    </div>
+                    <div class="about-image md:w-1/3 mt-8 md:mt-0 md:ml-8">
+                        <img src="https://placehold.co/300x300/F0F4F8/3B82F6?text=Tu+Foto" alt="Tu Foto de Perfil" class="rounded-full shadow-lg w-48 h-48 md:w-64 md:h-64 object-cover mx-auto animate-pulse-slight">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section skills-section bg-gray-50">
+            <div class="container mx-auto px-4 py-16">
+                <h2 class="section-title">Habilidades Técnicas</h2>
+                <div class="skills-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                    <!-- Ejemplo de Habilidad 1 -->
+                    <div class="skill-item p-6 rounded-xl shadow-md bg-white hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                        <h3 class="skill-title">Frontend</h3>
+                        <p class="skill-description mt-2">HTML5, CSS3 (Tailwind CSS, SASS), JavaScript (ES6+), React, Vue.js, Angular, Redux, Context API, Next.js.</p>
+                        <div class="skill-level mt-4">
+                            <div class="level-bar-container bg-gray-200 rounded-full h-2">
+                                <div class="level-bar bg-blue-500 h-full rounded-full" style="width: 90%;"></div>
+                            </div>
+                            <span class="level-text text-sm text-gray-600 mt-1 block text-right">Avanzado</span>
+                        </div>
+                    </div>
+                    <!-- Ejemplo de Habilidad 2 -->
+                    <div class="skill-item p-6 rounded-xl shadow-md bg-white hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                        <h3 class="skill-title">Backend</h3>
+                        <p class="skill-description mt-2">Node.js (Express), Python (Django, Flask), Ruby on Rails, PHP (Laravel), SQL (PostgreSQL, MySQL), NoSQL (MongoDB), RESTful APIs, GraphQL.</p>
+                        <div class="skill-level mt-4">
+                            <div class="level-bar-container bg-gray-200 rounded-full h-2">
+                                <div class="level-bar bg-green-500 h-full rounded-full" style="width: 80%;"></div>
+                            </div>
+                            <span class="level-text text-sm text-gray-600 mt-1 block text-right">Intermedio-Avanzado</span>
+                        </div>
+                    </div>
+                    <!-- Ejemplo de Habilidad 3 -->
+                    <div class="skill-item p-6 rounded-xl shadow-md bg-white hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                        <h3 class="skill-title">DevOps & Herramientas</h3>
+                        <p class="skill-description mt-2">Git, Docker, Kubernetes, AWS, Google Cloud Platform (GCP), Netlify, Vercel, CI/CD, Webpack, Babel, npm/yarn.</p>
+                        <div class="skill-level mt-4">
+                            <div class="level-bar-container bg-gray-200 rounded-full h-2">
+                                <div class="level-bar bg-purple-500 h-full rounded-full" style="width: 75%;"></div>
+                            </div>
+                            <span class="level-text text-sm text-gray-600 mt-1 block text-right">Intermedio</span>
+                        </div>
+                    </div>
+                    <!-- Puedes añadir más habilidades aquí -->
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section portfolio-section">
+            <div class="container mx-auto px-4 py-16">
+                <h2 class="section-title">Mi Portafolio</h2>
+                <div class="portfolio-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                    <!-- Proyecto 1 -->
+                    <div class="portfolio-item rounded-xl shadow-md bg-white overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                        <img src="https://placehold.co/400x250/3B82F6/FFFFFF?text=Proyecto+1" alt="Proyecto 1" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-semibold text-xl text-gray-800">Nombre del Proyecto 1</h3>
+                            <p class="text-gray-600 mt-2 text-sm">Descripción breve del proyecto, tecnologías utilizadas y su propósito.</p>
+                            <div class="project-links mt-4">
+                                <a href="https://github.com/tu-usuario/proyecto1" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline flex items-center text-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github mr-1"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.23c2.8.35 5.5 1.4 5.5 6.02v.22c0 2.2-1.5 4-3.5 4a6.5 6.5 0 0 1-3.26-1.07c-.39.23-.74.46-1.06.69-.75.58-1.46.99-2.34.99-.88 0-1.59-.41-2.34-.99-.32-.23-.67-.46-1.06-.69A6.5 6.5 0 0 1 2 20v-.22c0-4.62 2.7-5.67 5.5-6.02A4.8 4.8 0 0 0 6 18v4"/><path d="M9 18a.3.3 0 0 1-.45-.09A.3.3 0 0 1 9 18zm5 0a.3.3 0 0 1-.45-.09A.3.3 0 0 1 14 18z"/><path d="M9 18a.3.3 0 0 1-.45-.09A.3.3 0 0 1 9 18z"/></svg>
+                                    Código
+                                </a>
+                                <a href="https://tu-proyecto1.netlify.app" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline flex items-center mt-2 text-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link mr-1"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                                    Ver Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Proyecto 2 -->
+                    <div class="portfolio-item rounded-xl shadow-md bg-white overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                        <img src="https://placehold.co/400x250/60A5FA/FFFFFF?text=Proyecto+2" alt="Proyecto 2" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-semibold text-xl text-gray-800">Nombre del Proyecto 2</h3>
+                            <p class="text-gray-600 mt-2 text-sm">Descripción breve del proyecto, tecnologías utilizadas y su propósito.</p>
+                            <div class="project-links mt-4">
+                                <a href="https://github.com/tu-usuario/proyecto2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline flex items-center text-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github mr-1"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.23c2.8.35 5.5 1.4 5.5 6.02v.22c0 2.2-1.5 4-3.5 4a6.5 6.5 0 0 1-3.26-1.07c-.39.23-.74.46-1.06.69-.75.58-1.46.99-2.34.99-.88 0-1.59-.41-2.34-.99-.32-.23-.67-.46-1.06-.69A6.5 6.5 0 0 1 2 20v-.22c0-4.62 2.7-5.67 5.5-6.02A4.8 4.8 0 0 0 6 18v4"/><path d="M9 18a.3.3 0 0 1-.45-.09A.3.3 0 0 1 9 18zm5 0a.3.3 0 0 1-.45-.09A.3.3 0 0 1 14 18z"/><path d="M9 18a.3.3 0 0 1-.45-.09A.3.3 0 0 1 9 18z"/></svg>
+                                    Código
+                                </a>
+                                <a href="https://tu-proyecto2.netlify.app" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline flex items-center mt-2 text-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link mr-1"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                                    Ver Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Añade más proyectos aquí -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-section bg-gray-50">
+            <div class="container mx-auto px-4 py-16 text-center">
+                <h2 class="section-title">Contacto</h2>
+                <p class="text-lg text-gray-700 mt-4">¿Interesado en colaborar o simplemente quieres saludar? ¡No dudes en contactarme!</p>
+                <div class="contact-methods mt-8">
+                    <a href="mailto:tu.correo@example.com" class="button button-primary">
+                        Enviar Correo
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send ml-2"><path d="m22 2-7 7m-13 13L22 2m0 0-7 7m7-7L9 22"/></svg>
+                    </a>
+                    <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener noreferrer" class="button button-secondary mt-4 md:mt-0 md:ml-4">
+                        Conectar en LinkedIn
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin ml-2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container mx-auto px-4 py-6 text-center text-gray-600 text-sm">
+            <p>&copy; 2025 Tu Nombre. Todos los derechos reservados.</p>
+            <p class="mt-2">Diseñado con ❤️ y código.</p>
+        </div>
+    </footer>
+
+    <!-- Enlace al script JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // Inicializa los iconos de Lucide
+        lucide.createIcons();
+    </script>
+</body>
+</html>
