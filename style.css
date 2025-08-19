@@ -7,53 +7,77 @@ body {
     color: #333;
     line-height: 1.6;
     background-color: #f8f9fa; /* Fondo general claro */
+    overflow-x: hidden; /* Evita el scroll horizontal causado por animaciones fuera de pantalla */
 }
 
-/* Animación de fondo sutil para el cuerpo */
-body::before {
+/* Animación de fondo sutil y dinámica para el cuerpo */
+body::before, body::after {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.1) 0%, transparent 30%),
-                radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.1) 0%, transparent 30%);
-    opacity: 0.6;
+    border-radius: 50%;
+    opacity: 0.1;
     z-index: -1;
-    animation: gradientShift 20s ease infinite alternate;
+    filter: blur(50px);
 }
 
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 0%;
-    }
-    100% {
-        background-position: 100% 100%;
-    }
+body::before {
+    top: -10vh;
+    left: -10vw;
+    width: 60vw;
+    height: 60vh;
+    background: linear-gradient(135deg, #3b82f6, #a855f7); /* Azul a Púrpura */
+    animation: float1 20s ease-in-out infinite alternate;
 }
+
+body::after {
+    bottom: -10vh;
+    right: -10vw;
+    width: 70vw;
+    height: 70vh;
+    background: linear-gradient(45deg, #a855f7, #ef4444); /* Púrpura a Rojo */
+    animation: float2 25s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes float1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(20vw, 30vh) scale(1.1); }
+}
+
+@keyframes float2 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-20vw, -30vh) scale(1.2); }
+}
+
 
 /* Estilos Generales para Secciones */
 .section {
     padding: 6rem 0;
     opacity: 0; /* Inicialmente oculto para animación de fade-in */
-    transform: translateY(20px); /* Ligeramente desplazado para animación */
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(50px) scale(0.98); /* Ligeramente desplazado y encogido */
+    transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .section.is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
 .section-title {
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 800; /* Más audaz */
     text-align: center;
     margin-bottom: 2rem;
     color: #2c3e50;
     position: relative;
     padding-bottom: 10px;
+    opacity: 0; /* Para animación de revelado de texto */
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s; /* Retraso para aparecer después de la sección */
+}
+
+.section-title.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .section-title::after {
@@ -61,97 +85,113 @@ body::before {
     position: absolute;
     left: 50%;
     bottom: 0;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
+    transform: translateX(-50%) scaleX(0); /* Inicialmente escondido */
+    width: 80px; /* Un poco más ancho */
+    height: 5px; /* Un poco más grueso */
     background-color: #3b82f6; /* Color primario */
     border-radius: 2px;
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.8s; /* Animación elástica */
+    transform-origin: center;
 }
+
+.section-title.is-visible::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
 
 /* Header */
 .header {
     background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada */
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-radius: 0 0 15px 15px; /* Bordes redondeados en la parte inferior */
-    animation: fadeInDown 0.5s ease-out;
+    border-radius: 0 0 25px 25px; /* Bordes más redondeados */
+    animation: fadeInDown 0.6s ease-out;
+    backdrop-filter: blur(8px); /* Efecto de cristal esmerilado */
+    background-color: rgba(255, 255, 255, 0.9); /* Ligeramente transparente */
 }
 
 .logo {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #3b82f6; /* Color primario */
+    font-size: 2rem; /* Más grande */
+    font-weight: 800;
+    color: #3b82f6;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .logo:hover {
-    color: #2563eb; /* Un tono más oscuro */
+    color: #2563eb;
+    transform: scale(1.05); /* Ligeramente más grande al pasar el mouse */
 }
 
 .nav-menu .nav-link {
-    margin-left: 2rem;
+    margin-left: 2.5rem; /* Más espacio */
     color: #555;
-    font-weight: 500;
+    font-weight: 600; /* Más audaz */
     text-decoration: none;
     position: relative;
     transition: color 0.3s ease, transform 0.2s ease;
-    padding: 0.5rem 0;
+    padding: 0.8rem 0; /* Más relleno */
+    overflow: hidden; /* Para el efecto de fondo */
 }
 
-.nav-menu .nav-link::after {
+.nav-menu .nav-link::before {
     content: '';
     position: absolute;
-    width: 0%;
-    height: 2px;
     bottom: 0;
     left: 0;
+    width: 100%;
+    height: 4px; /* Más grueso */
     background-color: #3b82f6;
-    transition: width 0.3s ease-out;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-out;
+}
+
+.nav-menu .nav-link:hover::before {
+    transform: scaleX(1);
 }
 
 .nav-menu .nav-link:hover {
     color: #3b82f6;
-    transform: translateY(-2px);
+    transform: translateY(-3px); /* Ligeramente más arriba */
 }
 
-.nav-menu .nav-link:hover::after {
-    width: 100%;
-}
 
 /* Hero Section */
 .hero-section {
-    min-height: calc(100vh - 80px); /* Altura de la vista menos la altura del header */
-    background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%); /* Degradado suave */
+    min-height: calc(100vh - 80px);
+    background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%);
     color: #2c3e50;
     position: relative;
-    overflow: hidden; /* Para contener las formas animadas */
+    overflow: hidden;
 }
 
 .hero-content {
     max-width: 900px;
-    animation: fadeInUp 1s ease-out;
+    animation: fadeInScaleUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Nueva animación */
 }
 
 .hero-title {
-    font-size: 4rem;
-    font-weight: 800;
+    font-size: 4.5rem; /* Más grande */
+    font-weight: 900; /* Aún más audaz */
     line-height: 1.1;
     margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+    overflow: hidden; /* Para la animación de revelado */
 }
 
+/* Animación de revelado para el título del héroe */
 .hero-title .highlight {
-    color: #3b82f6; /* Color primario */
+    color: #3b82f6;
 }
 
 .hero-subtitle {
-    font-size: 1.75rem;
+    font-size: 1.4rem; /* Más grande */
     font-weight: 400;
     color: #555;
-    animation: fadeIn 1.5s ease-out 0.5s forwards; /* Retraso para aparecer después del título */
+    animation: fadeIn 1.5s ease-out 0.8s forwards;
     opacity: 0;
 }
 
@@ -159,34 +199,34 @@ body::before {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 50px;
+    width: 55px; /* Más grande */
+    height: 55px;
     background-color: #ffffff;
     border-radius: 50%;
-    margin: 0 0.75rem;
+    margin: 0 1rem; /* Más espacio */
     color: #3b82f6;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transición elástica */
     border: 2px solid transparent;
 }
 
 .social-links .social-icon:hover {
     background-color: #3b82f6;
     color: #ffffff;
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+    transform: translateY(-8px) scale(1.1) rotate(5deg); /* Efecto más dinámico */
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
     border-color: #ffffff;
 }
 
 /* Animaciones para la sección Hero */
 @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
+    from { opacity: 0; transform: translateY(-30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes fadeInScaleUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes fadeIn {
@@ -196,92 +236,142 @@ body::before {
 
 /* Animación de la imagen de perfil */
 @keyframes pulse-slight {
-    0% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-    50% { transform: scale(1.02); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-    100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    0% { transform: scale(1) rotate(0deg); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    50% { transform: scale(1.03) rotate(2deg); box-shadow: 0 8px 25px rgba(0,0,0,0.18); }
+    100% { transform: scale(1) rotate(0deg); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
 }
 .animate-pulse-slight {
-    animation: pulse-slight 3s infinite ease-in-out;
+    animation: pulse-slight 4s infinite ease-in-out;
 }
 
 
 /* About Section */
 .about-section {
     background-color: #ffffff;
-    border-radius: 15px;
+    border-radius: 20px; /* Más redondeado */
     margin: 2rem auto;
     max-width: 1200px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1); /* Sombra más suave y extendida */
 }
 
 .about-text p {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem; /* Más espacio entre párrafos */
     color: #444;
+    font-size: 1.05rem; /* Ligeramente más grande */
 }
 
 
 /* Skills Section */
 .skills-section {
-    background-color: #f0f4f8; /* Un gris muy claro */
-    border-radius: 15px;
+    background-color: #f0f4f8;
+    border-radius: 20px;
     margin: 2rem auto;
     max-width: 1200px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
 }
 
 .skill-item {
-    border: 1px solid #e0e7ff;
-    transition: all 0.3s ease;
-    border-radius: 15px;
-    overflow: hidden; /* Asegura que el contenido interno no se desborde al redondear */
+    border: 1px solid #d0e0ff; /* Borde más claro */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transición elástica */
+    border-radius: 20px; /* Más redondeado */
+    overflow: hidden;
+    /* Estilos para animación de entrada escalonada */
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Animación escalonada para elementos de la cuadrícula de habilidades */
+.skills-section.is-visible .skill-item {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Aplica retrasos incrementales usando nth-child */
+.skills-section.is-visible .skill-item:nth-child(1) { transition-delay: 0.1s; }
+.skills-section.is-visible .skill-item:nth-child(2) { transition-delay: 0.2s; }
+.skills-section.is-visible .skill-item:nth-child(3) { transition-delay: 0.3s; }
+.skills-section.is-visible .skill-item:nth-child(4) { transition-delay: 0.4s; }
+.skills-section.is-visible .skill-item:nth-child(5) { transition-delay: 0.5s; }
+.skills-section.is-visible .skill-item:nth-child(6) { transition-delay: 0.6s; }
+
+
+.skill-item:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Sombra más fuerte al pasar el mouse */
+    transform: translateY(-8px) scale(1.02); /* Mayor elevación */
+    border-color: #3b82f6; /* Borde de color primario */
 }
 
 .skill-title {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.6rem; /* Más grande */
+    font-weight: 700;
     color: #3b82f6;
-    margin-bottom: 0.5rem;
 }
 
 .skill-description {
     color: #555;
-    font-size: 0.95rem;
+    font-size: 1rem;
 }
 
 .level-bar-container {
-    height: 8px;
-    border-radius: 9999px; /* Para que sea totalmente redondo */
+    height: 10px; /* Más grueso */
+    border-radius: 9999px;
     overflow: hidden;
 }
 
 .level-bar {
     height: 100%;
     border-radius: 9999px;
-    animation: fillBar 1.5s ease-out forwards;
-    width: 0; /* Se animará con JS */
+    animation: fillBar 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; /* Animación elástica */
+    width: 0;
 }
 
-/* Animación de llenado de la barra de habilidad */
+/* Animación de llenado de la barra de habilidad (no hay cambios, sigue usando JS para width) */
 @keyframes fillBar {
     from { width: 0; }
-    to { width: var(--skill-width); } /* Usado con JS para el ancho final */
+    to { width: var(--skill-width); }
 }
 
 
 /* Portfolio Section */
 .portfolio-section {
     background-color: #ffffff;
-    border-radius: 15px;
+    border-radius: 20px;
     margin: 2rem auto;
     max-width: 1200px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
 }
 
 .portfolio-item {
-    border: 1px solid #e0e7ff;
-    transition: all 0.3s ease;
-    border-radius: 15px;
+    border: 1px solid #d0e0ff;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 20px;
     overflow: hidden;
+    /* Estilos para animación de entrada escalonada */
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Animación escalonada para elementos de la cuadrícula de portafolio */
+.portfolio-section.is-visible .portfolio-item {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Aplica retrasos incrementales usando nth-child */
+.portfolio-section.is-visible .portfolio-item:nth-child(1) { transition-delay: 0.1s; }
+.portfolio-section.is-visible .portfolio-item:nth-child(2) { transition-delay: 0.2s; }
+.portfolio-section.is-visible .portfolio-item:nth-child(3) { transition-delay: 0.3s; }
+.portfolio-section.is-visible .portfolio-item:nth-child(4) { transition-delay: 0.4s; }
+.portfolio-section.is-visible .portfolio-item:nth-child(5) { transition-delay: 0.5s; }
+.portfolio-section.is-visible .portfolio-item:nth-child(6) { transition-delay: 0.6s; }
+
+
+.portfolio-item:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px) scale(1.02);
+    border-color: #3b82f6;
 }
 
 .portfolio-item img {
@@ -289,32 +379,58 @@ body::before {
 }
 
 .project-links a {
-    font-weight: 500;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .project-links a:hover {
     color: #2563eb;
+    transform: translateX(5px); /* Ligeramente a la derecha */
 }
 
 /* Contact Section */
 .contact-section {
     background-color: #f0f4f8;
-    border-radius: 15px;
+    border-radius: 20px;
     margin: 2rem auto;
     max-width: 1200px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
 }
 
 .button {
     display: inline-flex;
     align-items: center;
-    padding: 0.8rem 1.8rem;
-    border-radius: 50px; /* Botones pill-shaped */
-    font-weight: 600;
+    padding: 1rem 2.5rem; /* Más relleno */
+    border-radius: 50px;
+    font-weight: 700; /* Más audaz */
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transición elástica */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Sombra más pronunciada */
+    position: relative;
+    overflow: hidden; /* Para el efecto de onda */
+    z-index: 1;
+}
+
+/* Efecto de onda al hacer clic/hover */
+.button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2); /* Onda blanca semi-transparente */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: width 0.5s ease-out, height 0.5s ease-out, opacity 0.5s ease-out;
+    z-index: -1;
+}
+
+.button:hover::before {
+    width: 200%;
+    height: 200%;
+    opacity: 1;
 }
 
 .button-primary {
@@ -326,8 +442,8 @@ body::before {
 .button-primary:hover {
     background-color: #2563eb;
     border-color: #2563eb;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
 }
 
 .button-secondary {
@@ -340,17 +456,17 @@ body::before {
     background-color: #e0f2fe;
     color: #2563eb;
     border-color: #2563eb;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
 }
 
 /* Footer */
 .footer {
-    background-color: #2c3e50; /* Un color oscuro para el footer */
+    background-color: #2c3e50;
     color: #ecf0f1;
-    padding: 2rem 0;
+    padding: 2.5rem 0; /* Más relleno */
     border-top: 5px solid #3b82f6;
-    border-radius: 15px 15px 0 0; /* Bordes redondeados en la parte superior */
+    border-radius: 20px 20px 0 0; /* Más redondeado */
 }
 
 /* Media Queries para Responsividad */
@@ -372,17 +488,17 @@ body::before {
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.8rem; /* Ajuste para móvil */
     }
 
     .hero-subtitle {
-        font-size: 1.25rem;
+        font-size: 1.4rem; /* Ajuste para móvil */
     }
 
     .social-links .social-icon {
-        width: 40px;
-        height: 40px;
-        margin: 0 0.5rem;
+        width: 45px;
+        height: 45px;
+        margin: 0 0.6rem;
     }
 
     .section {
@@ -390,7 +506,7 @@ body::before {
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
     .about-content {
@@ -416,11 +532,11 @@ body::before {
     }
 
     .button {
-        width: 80%; /* Asegura que los botones ocupen más espacio en móvil */
-        margin-left: 0 !important; /* Anula el margin-left en móvil */
+        width: 90%;
+        margin-left: 0 !important;
         margin-right: 0 !important;
     }
     .button-secondary {
-        margin-top: 1rem; /* Espacio entre botones en móvil */
+        margin-top: 1rem;
     }
 }

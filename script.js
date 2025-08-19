@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (targetSection) {
                 // Calcula la posición de desplazamiento
-                const offsetTop = targetSection.offsetTop - document.querySelector('.header').offsetHeight; // Ajusta por la altura del header fijo
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const offsetTop = targetSection.offsetTop - headerHeight; // Ajusta por la altura del header fijo
 
                 window.scrollTo({
                     top: offsetTop,
@@ -19,13 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 2. Animación de fade-in para las secciones al hacer scroll (Intersection Observer)
+    // 2. Animación de fade-in y transform para las secciones al hacer scroll (Intersection Observer)
     const sections = document.querySelectorAll('.section');
-
-    const observerOptions = {
-        root: null, // El viewport es el elemento raíz
-        rootMargin: '0px', // No hay margen extra
-        threshold: 0.1 // Cuando el 10% de la sección es visible
+    const sectionTitleObserverOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.2 // Cuando el 20% de la sección es visible
     };
 
     const sectionObserver = new IntersectionObserver((entries, observer) => {
@@ -37,11 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, sectionTitleObserverOptions);
 
     sections.forEach(section => {
         sectionObserver.observe(section); // Empieza a observar cada sección
     });
+
 
     // 3. Animación de llenado de barras de habilidad al ser visibles
     const skillBars = document.querySelectorAll('.skill-level .level-bar');
@@ -59,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Establece una variable CSS personalizada para la animación
                 entry.target.style.setProperty('--skill-width', skillWidth);
                 entry.target.style.width = skillWidth; // Asegura que el ancho final se aplique
-                entry.target.style.animation = 'fillBar 1.5s ease-out forwards'; // Activa la animación
+                entry.target.style.animation = 'fillBar 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards'; // Activa la animación
                 observer.unobserve(entry.target); // Deja de observar una vez animado
             }
         });
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const textToType = heroSubtitle.textContent;
     heroSubtitle.textContent = ''; // Limpia el contenido inicial
     let charIndex = 0;
-    const typingSpeed = 50; // Velocidad de escritura en ms
+    const typingSpeed = 40; // Velocidad de escritura en ms, ligeramente más rápida
 
     function typeWriter() {
         if (charIndex < textToType.length) {
@@ -89,11 +90,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                setTimeout(typeWriter, 1000); // Inicia la escritura después de 1 segundo de que la sección sea visible
+                setTimeout(typeWriter, 1200); // Inicia la escritura después de un pequeño retraso
                 observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.5 }); // Observa cuando el 50% de la sección hero es visible
 
     heroObserver.observe(heroSection);
+
+    // 5. Animación de revelado para los títulos de sección al volverse visibles
+    const sectionTitles = document.querySelectorAll('.section-title');
+    const titleObserverOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5 // Cuando el 50% del título es visible
+    };
+
+    const titleObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, titleObserverOptions);
+
+    sectionTitles.forEach(title => {
+        titleObserver.observe(title);
+    });
 });
